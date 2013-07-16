@@ -12,5 +12,11 @@ Example of `start.sh` script:
     sbt run com.example.Boot.main
 
 Make sure `start.sh` is an executable file: `chmod +x start.sh` 
-    
-This cartidge embed a [spray](https://github.com/spray/spray-template) example
+
+In your application listen on the environment variable $OPENSHIFT_SCALA_IP:$OPENSHIFT_SCALA_PORT
+
+    interface = System.getenv("OPENSHIFT_SCALA_IP")
+    port = System.getenv("OPENSHIFT_SCALA_PORT").toInt
+
+This cartidge embed a [spray](https://github.com/spray/spray-template) example, but you could use any framework as long as sbt is used for compilation.
+
