@@ -1,5 +1,18 @@
 #!/bin/bash
+set -e
+
+VERSION=2.10.2
+SBT_VERSION=0.12.4
 
 cd ${OPENSHIFT_DATA_DIR}
-curl -s -o ${OPENSHIFT_DATA_DIR}/dartsdk-linux-64.tar.gz https://storage.googleapis.com/dart-editor-archive-integration/latest/dartsdk-linux-64.tar.gz
-tar xzf dartsdk-linux-64.tar.gz
+
+echo "Download scala $VERSION"
+curl -s -o ${OPENSHIFT_DATA_DIR}/scala-$VERSION.tgz http://www.scala-lang.org/downloads/distrib/files/scala-$VERSION.tgz 
+tar xzf scala-$VERSION.tgz
+rm -f scala-$VERSION.tgz
+ln -s ${OPENSHIFT_DATA_DIR}/scala-$VERSION scala
+
+echo "Download sbt $SBT_VERSION"
+curl -s -o  ${OPENSHIFT_DATA_DIR}/sbt.tgz http://scalasbt.artifactoryonline.com/scalasbt/sbt-native-packages/org/scala-sbt/sbt/$SBT_VERSION/sbt.tgz
+tar xzf sbt.tgz
+rm -f xzf sbt.tgz

@@ -4,7 +4,6 @@ locked_files:
 - bin/*
 - metadata/
 - metadata/*
-- env/
 - env/*
 - template/
 processed_templates:

@@ -1,14 +1,14 @@
 #!/bin/bash -e
 
-PATH=${OPENSHIFT_DATA_DIR}/dart-sdk/bin/:/bin/:/usr/bin:$PATH
+PATH=${OPENSHIFT_DATA_DIR}/scala/bin/:${OPENSHIFT_DATA_DIR}/sbt/bin/:/bin/:/usr/bin:$PATH
 
 function start {
     cd $OPENSHIFT_REPO_DIR
-    nohup dart server.dart >> $OPENSHIFT_DART_LOG_DIR/dart.log 2>&1  &
+    nohup ./start.sh >> $OPENSHIFT_SCALA_LOG_DIR/scala.log 2>&1  &
 }
 
 function stop {
-    killall dart || true
+    killall java || true
 }
 
 function restart {
@@ -25,13 +25,16 @@ function build {
     unset GIT_WORK_TREE
 
     cd $OPENSHIFT_REPO_DIR
-    pub install
+    sbt compile
 }
 
 function tidy {
     shopt -s dotglob
-    rm -rf $OPENSHIFT_DART_LOG_DIR/*
+    rm -rf $OPENSHIFT_SCALA_LOG_DIR/*
     rm -rf $OPENSHIFT_TMP_DIR/*
+
+    cd $OPENSHIFT_REPO_DIR
+    sbt clean
 }
 
 function catchall {
